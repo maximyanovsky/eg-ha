@@ -1,15 +1,14 @@
 package
 {
     import flash.display.Sprite;
-    import flash.text.TextField;
+
+    import org.robotlegs.core.IContext;
 
     public class EvolutionGaming extends Sprite
     {
         public function EvolutionGaming()
         {
-            var textField:TextField = new TextField();
-            textField.text = "Hello, World";
-            addChild(textField);
+            var context:IContext = new GalleryContext(this);
         }
     }
 }

@@ -1,16 +1,28 @@
-/**
- * Created with IntelliJ IDEA.
- * User: Maxik
- * Date: 27.08.15
- * Time: 23:27
- * To change this template use File | Settings | File Templates.
- */
 package
 {
-    public class GalleryContext
+    import flash.display.DisplayObjectContainer;
+
+    import org.osflash.signals.ISignal;
+    import org.osflash.signals.natives.NativeSignal;
+    import org.robotlegs.base.ContextError;
+    import org.robotlegs.base.ContextEvent;
+    import org.robotlegs.mvcs.Context;
+    import org.robotlegs.mvcs.SignalContext;
+
+    public class GalleryContext extends SignalContext
     {
-        public function GalleryContext()
+        public function GalleryContext(contextView:DisplayObjectContainer)
         {
+            super (contextView)
+        }
+
+        override public function startup():void
+        {
+            var startupComplete:ISignal = new NativeSignal(this, ContextEvent.STARTUP_COMPLETE);
+
+            signalCommandMap.mapSignal(startupComplete, StartupCommand);
+
+            super.startup();
         }
     }
 }
