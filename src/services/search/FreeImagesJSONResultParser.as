@@ -10,21 +10,45 @@ package services.search
     {
         public function parse(rawData:String):SearchResultVO
         {
-            var data:Object = JSON.parse(rawData);
+            if (!rawData) throw new ParserError("invalid data");
 
-            var result:SearchResultVO = new SearchResultVO();
-            result.images = new Vector.<ImageVO>();
-
-            for each (var sourceData:Object in data["sources"])
+            var data:Object;
+            try
             {
-                for each (var imgData:Object in sourceData["result"])
+                data = JSON.parse(rawData);
+            }
+            catch(e:Error)
+            {
+                throw new ParserError("invalid json")
+            }
+
+            var retval:SearchResultVO = new SearchResultVO();
+            retval.images = new Vector.<ImageVO>();
+
+            var sources:Array = data["sources"] as Array;
+            if (!sources) throw new ParserError("invalid sources");
+
+            for each (var sourceData:Object in sources)
+            {
+                if (typeof sourceData != "object") throw new ParserError("invalid source");
+                var results:Array = sourceData["result"] as Array;
+
+                if (!results) throw new ParserError("invalid result for source " + sourceData["source_name"]);
+
+                for each (var imgData:Object in results)
                 {
                     var img:ImageVO = new ImageVO();
-                    img.url = imgData["preview_url"];
-                    result.images.push(img);
+                    img.url = getString(imgData, "preview_url");
+                    retval.images.push(img);
                 }
             }
-            return result;
+            return retval;
+        }
+
+        private static function getString(source:Object, property:String):String
+        {
+            if (!source || !source.hasOwnProperty(property)) throw new ParserError("invalid image " + property);
+            return source[property];
         }
     }
 }

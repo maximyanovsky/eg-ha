@@ -1,4 +1,4 @@
-package
+package common
 {
     public interface IDisposable
     {

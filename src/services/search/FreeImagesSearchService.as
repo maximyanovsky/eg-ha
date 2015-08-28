@@ -1,104 +1,78 @@
 package services.search
 {
-    import flash.errors.IllegalOperationError;
-    import flash.events.Event;
-    import flash.events.IOErrorEvent;
-    import flash.events.SecurityErrorEvent;
-    import flash.net.URLLoader;
-    import flash.net.URLRequest;
+    import flash.events.ErrorEvent;
 
-    import org.osflash.signals.ISignal;
-    import org.osflash.signals.Signal;
-    import org.osflash.signals.natives.sets.URLLoaderSignalSet;
-
+    import services.network.INetworkService;
     import services.search.vos.SearchResultVO;
+
+    import common.signals.SignalString;
 
     /**
      * Service for receiving images info from freeimages.pictures API
      */
-    public class FreeImagesSearchService implements IImageSearchService, IDisposable
+    public class FreeImagesSearchService implements IImageSearchService
     {
-        private static const API_URL:String = "http://freeimages.pictures/api/user/";
+        [Inject] public var _networkService:INetworkService;
+        [Inject] public var _parser:ISearchResultParser;
 
-        private var _received:Signal;
-        private var _failed:Signal;
+        private static const API_URL:String = "http://freeimages.pictures/api/user";
+        private static const API_KEY:String = "9203182073775680";
+        private static const FORMAT:String = "json";
 
-        private var _loader:URLLoader;
-        private var _apiKey:String;
-        private var _parser:ISearchResultParser;
-        private var _format:String;
+        private var _received:SignalSearchResult;
+        private var _failed:SignalString;
 
-        private var _signalSet:URLLoaderSignalSet;
-
-        /**
-         * Constructor
-         * @param apiKey API Key
-         * @param format format of data provided to parser
-         */
-        public function FreeImagesSearchService(apiKey:String, format:String = "json")
+        public function FreeImagesSearchService()
         {
-            _apiKey = apiKey;
-            _format = format;
-
-            _loader = new URLLoader();
-            _signalSet = new URLLoaderSignalSet(_loader);
-            _received = new Signal(SearchResultVO);
-            _failed = new Signal(Error);
+            _received = new SignalSearchResult();
+            _failed = new SignalString();
         }
 
         public function getResults(keyword:String):void
         {
             if (!keyword)
                 throw new ArgumentError("keyword must be set");
-            if (!_parser)
-                throw new IllegalOperationError("parser must be set");
 
+            _networkService.received.add(onComplete);
+            _networkService.failed.add(onFailed);
 
-            _signalSet.complete.addOnce(onComplete);
-            _signalSet.ioError.add(onIoError);
-            _signalSet.securityError.add(onSecurityError);
-
-            var url:String = API_URL + _apiKey + "/?keyword=" + keyword + "&sources=flickr&format=" + _format;
-            _loader.load(new URLRequest(url));
+            var url:String = API_URL + "/" + API_KEY + "/?keyword=" + keyword + "&sources=flickr&format=" + FORMAT;
+            _networkService.load(url);
         }
 
-        public function set parser(value:ISearchResultParser):void
-        {
-            if (!value)
-                throw new ArgumentError("invalid parser");
-
-            _parser = value;
-        }
-
-        public function get received():ISignal
+        public function get received():SignalSearchResult
         {
             return _received;
         }
 
-        public function get failed():ISignal
+        public function get failed():SignalString
         {
             return _failed;
         }
 
+        private function onComplete(rawData:String):void
+        {
+            var result:SearchResultVO;
+            try
+            {
+                var data:String = rawData;
+                result = _parser.parse(data);
+                _received.dispatch(result);
+            }
+            catch (e:ParserError)
+            {
+                _failed.dispatch(e.message)
+            }
+        }
+
+        private function onFailed(e:ErrorEvent):void
+        {
+            _failed.dispatch(e.text);
+        }
+
         public function dispose():void
         {
-            _signalSet.removeAll();
-        }
-
-        private function onSecurityError(e:SecurityErrorEvent):void
-        {
-            _failed.dispatch(e.errorID)
-        }
-
-        private function onIoError(e:IOErrorEvent):void
-        {
-            _failed.dispatch(e.errorID);
-        }
-
-        private function onComplete(e:Event):void
-        {
-            var result:SearchResultVO = _parser.parse(_loader.data);
-            _received.dispatch(result);
+            _networkService.dispose();
         }
     }
 }

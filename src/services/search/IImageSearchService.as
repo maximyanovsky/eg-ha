@@ -1,29 +1,27 @@
 package services.search
 {
+    import common.IDisposable;
+
     import org.osflash.signals.ISignal;
 
-    public interface IImageSearchService
+    import common.signals.SignalString;
+
+    public interface IImageSearchService extends IDisposable
     {
         /**
-         * SearchResultVO dispatched after all the received data is parsed
+         * dispatched after all the received data is parsed
          */
-        function get received():ISignal;
+        function get received():SignalSearchResult;
 
         /**
-         * errorID:String dispatched if the search is failed
+         * error description dispatched if the search is failed
          */
-        function get failed():ISignal;
+        function get failed():SignalString;
 
         /**
          * Request images info by the search keyword
          * @param keyword
          */
         function getResults(keyword:String):void;
-
-        /**
-         * Parser for the received data
-         * @param value
-         */
-        function set parser(value:ISearchResultParser):void;
     }
 }

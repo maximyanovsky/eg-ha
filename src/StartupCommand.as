@@ -1,23 +1,18 @@
 package
 {
-    import org.robotlegs.mvcs.Command;
     import org.robotlegs.mvcs.SignalCommand;
 
     import services.search.IImageSearchService;
-    import services.search.FreeImagesJSONResultParser;
-    import services.search.FreeImagesSearchService;
     import services.search.vos.SearchResultVO;
 
     public class StartupCommand extends SignalCommand
     {
-        public function StartupCommand()
-        {
-            trace("startup");
+        [Inject] public var _searchService:IImageSearchService;
 
-            var service:IImageSearchService = new FreeImagesSearchService("9203182073775680");
-            service.parser = new FreeImagesJSONResultParser();
-            service.received.add(onReceived);
-            service.getResults("fucking");
+        override public function execute():void
+        {
+            _searchService.received.add(onReceived);
+            _searchService.getResults("fairytail");
         }
 
         private function onReceived(result:SearchResultVO):void
