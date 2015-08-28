@@ -17,6 +17,9 @@
             <entry library-id="ebc72585-d225-45f5-9c95-f8e0e33eb020">
               <dependency linkage="Test" />
             </entry>
+            <entry library-id="c53cee18-0a22-4c70-b4c5-eb378dcd3f6a">
+              <dependency linkage="Merged" />
+            </entry>
           </entries>
           <sdk name="flex_sdk_4.6" />
         </dependencies>
@@ -71,6 +74,16 @@
         <properties id="ebc72585-d225-45f5-9c95-f8e0e33eb020" />
         <CLASSES>
           <root url="jar://$MODULE_DIR$/libs/mockolate-0.12.4-as3.swc!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="c53cee18-0a22-4c70-b4c5-eb378dcd3f6a" />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/greensock.swc!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

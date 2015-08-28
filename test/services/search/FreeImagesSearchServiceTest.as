@@ -27,7 +27,7 @@ package services.search
         }
 
         [Test]
-        public function shouldReturnValidValue():void
+        public function shouldLoadDataAndPassItToParserThenDispatchReceived():void
         {
             var injector:Injector = new Injector();
             var networkService:MockNetworkService = partial(MockNetworkService);

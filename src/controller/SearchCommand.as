@@ -1,23 +1,24 @@
-package
+package controller
 {
     import org.robotlegs.mvcs.SignalCommand;
 
     import services.search.IImageSearchService;
     import services.search.vos.SearchResultVO;
 
-    public class StartupCommand extends SignalCommand
+    public class SearchCommand extends SignalCommand
     {
-        [Inject] public var _searchService:IImageSearchService;
+        [Inject] public var searchService:IImageSearchService;
+        [Inject] public var keyword:String;
 
         override public function execute():void
         {
-            _searchService.received.add(onReceived);
-            _searchService.getResults("fairytail");
+            searchService.received.add(onReceived);
+            searchService.getResults(keyword);
         }
 
         private function onReceived(result:SearchResultVO):void
         {
-            trace("op");
+
         }
     }
 }
