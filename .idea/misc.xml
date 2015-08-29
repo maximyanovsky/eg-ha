@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="IdProvider" IDEtalkID="E9B6F3A7AD3051CEDF66745E581C44C2" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="flex_sdk_4.6" project-jdk-type="Flex SDK Type (new)">
-    <output url="file://$PROJECT_DIR$/out" />
-  </component>
-</project>
