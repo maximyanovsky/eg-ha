@@ -1,5 +1,13 @@
 package views
 {
+    import flash.events.KeyboardEvent;
+    import flash.ui.Keyboard;
+
+    import org.osflash.signals.ISignal;
+
+    import org.osflash.signals.Signal;
+    import org.osflash.signals.natives.NativeSignal;
+
     import views.IImageViewFactory;
     import controller.signals.SearchFailedSignal;
     import controller.signals.SearchSubmittedSignal;
@@ -25,8 +33,13 @@ package views
 
         [Inject] public var view:GalleryView;
 
+        private var _keyboardSignal:ISignal;
+
         override public function onRegister():void
         {
+            _keyboardSignal = new NativeSignal(contextView.stage, KeyboardEvent.KEY_DOWN);
+            _keyboardSignal.add(onKeyDown);
+
             stageResized.add(onStageResized);
             view.input.changed.add(onInputChanged);
             view.searchButton.clicked.add(onSearchClick);
@@ -35,6 +48,15 @@ package views
             searchFailedSignal.add(onSearchFailed);
             onStageResized();
             onInputChanged();
+        }
+
+        private function onKeyDown(e:KeyboardEvent):void
+        {
+            if (e.keyCode == Keyboard.ENTER)
+            {
+                if (view.searchButton.enabled)
+                    onSearchClick();
+            }
         }
 
         private function onSearchFailed(status:String):void
