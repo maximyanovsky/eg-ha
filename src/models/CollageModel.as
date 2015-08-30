@@ -6,6 +6,7 @@ package models
     {
         private var _resized:Signal;
         private var _imageAdded:ImageSignal;
+        private var _imageRemoved:ImageSignal;
 
         private var _images:Vector.<ImageModel>;
         private var _width:Number;
@@ -17,6 +18,7 @@ package models
             _images = new Vector.<ImageModel>();
             _resized = new Signal();
             _imageAdded = new ImageSignal();
+            _imageRemoved = new ImageSignal();
         }
 
         public function setSize(width:Number, height:Number):void
@@ -47,6 +49,7 @@ package models
             _images.splice(index, 1);
             trace("image removed " + image);
             image.removedFromCollage.dispatch();
+            _imageRemoved.dispatch(image);
         }
 
         public function removeAllImages():void
@@ -73,6 +76,11 @@ package models
         public function get imageAdded():ImageSignal
         {
             return _imageAdded;
+        }
+
+        public function get imageRemoved():ImageSignal
+        {
+            return _imageRemoved;
         }
     }
 }

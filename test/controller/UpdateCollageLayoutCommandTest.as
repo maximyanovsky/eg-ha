@@ -55,23 +55,5 @@ package controller
             assertThat(picture.bounds.width, equalTo(1));
             assertThat(picture.bounds.height, equalTo(1));
         }
-
-        [Test]
-        public function shouldFitTwoEquals():void
-        {
-            _collage.setSize(1, 1);
-            var picture1:ImageModel = new ImageModel(1, 1);
-            var picture2:ImageModel = new ImageModel(1, 1);
-            _collage.addImage(picture1);
-            _collage.addImage(picture2);
-            _cmd.execute();
-
-            var epsilon:Number = 0.1;
-
-            assertThat(picture1.bounds.x, between(0, epsilon/2));
-            assertThat(picture1.bounds.y, between(0, epsilon/2));
-            assertThat(picture1.bounds.width, between(1-epsilon, 1));
-            assertThat(picture1.bounds.height, between(1-epsilon, 1));
-        }
     }
 }

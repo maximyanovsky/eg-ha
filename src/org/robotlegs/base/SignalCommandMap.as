@@ -89,8 +89,9 @@ package org.robotlegs.base
         protected function routeSignalToCommand(signal:ISignal, valueObjects:Array, commandClass:Class, oneshot:Boolean):void
         {
             mapSignalValues( signal.valueClasses, valueObjects );
-            createCommandInstance( commandClass).execute();
+            var cmd:* = createCommandInstance( commandClass)
             unmapSignalValues( signal.valueClasses, valueObjects );
+            cmd.execute();
             if ( oneshot )
                 unmapSignal( signal, commandClass );
         }

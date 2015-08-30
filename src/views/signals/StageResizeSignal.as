@@ -1,4 +1,4 @@
-package
+package views.signals
 {
     import flash.display.Stage;
     import flash.events.Event;

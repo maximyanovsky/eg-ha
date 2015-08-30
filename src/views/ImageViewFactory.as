@@ -1,4 +1,4 @@
-package controller
+package views
 {
     import flash.display.DisplayObject;
 
@@ -17,12 +17,13 @@ package controller
 
         public function createView(picture:IImageModel):DisplayObject
         {
-            var subInjector:IInjector = injector.createChild(injector.applicationDomain);
-            subInjector.mapValue(IImageModel, picture);
+            injector.mapValue(IImageModel, picture);
             var view:ImageView = new ImageView();
-            subInjector.mapValue(ImageView, view);
+            injector.mapValue(ImageView, view);
             var mediator:ImageMediator = new ImageMediator();
-            subInjector.injectInto(mediator);
+            injector.injectInto(mediator);
+            injector.unmap(IImageModel);
+            injector.unmap(ImageView);
             mediatorMap.registerMediator(view, mediator);
             return view;
         }

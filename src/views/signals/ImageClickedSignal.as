@@ -1,12 +1,12 @@
-package controller.signals
+package views.signals
 {
     import models.IImageModel;
 
     import org.osflash.signals.Signal;
 
-    public class ImageViewRemovedSignal extends Signal
+    public class ImageClickedSignal extends Signal
     {
-        public function ImageViewRemovedSignal()
+        public function ImageClickedSignal()
         {
             super (IImageModel);
         }

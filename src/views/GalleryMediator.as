@@ -1,6 +1,6 @@
 package views
 {
-    import controller.IImageViewFactory;
+    import views.IImageViewFactory;
     import controller.signals.SearchFailedSignal;
     import controller.signals.SearchSubmittedSignal;
 
@@ -10,6 +10,8 @@ package views
     import models.IImageModel;
 
     import org.robotlegs.mvcs.Mediator;
+
+    import views.signals.StageResizeSignal;
 
     import views.ui.GalleryView;
 

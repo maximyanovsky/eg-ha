@@ -35,6 +35,7 @@ package views.ui
             var format:TextFormat = new TextFormat("Verdana", 16, 0x0, false);
             format.align = TextFormatAlign.CENTER;
             _statusTf.defaultTextFormat = format;
+            _statusTf.mouseEnabled = false;
         }
 
         public function update():void

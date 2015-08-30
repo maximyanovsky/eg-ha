@@ -2,9 +2,12 @@ package
 {
     import controller.AddImageCommand;
     import controller.DestroyImageCommand;
-    import controller.IImageViewFactory;
-    import controller.ImageViewFactory;
-    import controller.signals.ImageViewRemovedSignal;
+    import controller.RemoveImageFromCollageCommand;
+
+    import views.IImageViewFactory;
+    import views.ImageViewFactory;
+    import views.signals.ImageClickedSignal;
+    import views.signals.ImageViewRemovedSignal;
     import controller.ResizeCollageCommand;
     import controller.SearchCommand;
     import controller.signals.ImageReceivedSignal;
@@ -34,6 +37,7 @@ package
     import services.search.ISearchResultParser;
 
     import views.GalleryMediator;
+    import views.signals.StageResizeSignal;
 
     import views.ui.GalleryView;
 
@@ -67,9 +71,11 @@ package
             signalCommandMap.mapSignal(resize, ResizeCollageCommand);
             signalCommandMap.mapSignal(collageModel.resized, UpdateCollageLayoutCommand);
             signalCommandMap.mapSignal(collageModel.imageAdded, UpdateCollageLayoutCommand);
+            signalCommandMap.mapSignal(collageModel.imageRemoved, UpdateCollageLayoutCommand);
             signalCommandMap.mapSignalClass(SearchSubmittedSignal, SearchCommand);
             signalCommandMap.mapSignalClass(ImageReceivedSignal, AddImageCommand);
             signalCommandMap.mapSignalClass(ImageViewRemovedSignal, DestroyImageCommand);
+            signalCommandMap.mapSignalClass(ImageClickedSignal, RemoveImageFromCollageCommand);
 
             super.startup();
         }
