@@ -1,5 +1,6 @@
 package services.network
 {
+    import flash.events.ErrorEvent;
     import flash.events.Event;
     import flash.net.URLLoader;
     import flash.net.URLLoaderDataFormat;
@@ -17,6 +18,8 @@ package services.network
         private var _received:Signal;
         private var _failed:ErrorEventSignal;
 
+        private var _requestInProgress:Boolean = false;
+
         public function URLLoaderNetworkService()
         {
             _urlLoader = new URLLoader();
@@ -33,6 +36,8 @@ package services.network
         private function onComplete(e:Event):void
         {
             _received.dispatch(_urlLoader.data);
+            _requestInProgress = false;
+            dispose();
         }
 
         public function get received():Signal
@@ -50,13 +55,15 @@ package services.network
             if (!NetworkServiceDataFormat.isValid(dataFormat))
                 throw new ArgumentError("invalid data format " + dataFormat);
 
+            _requestInProgress = true;
             _urlLoader.dataFormat = dataFormat;
             _urlLoader.load(new URLRequest(url));
         }
 
         public function dispose():void
         {
-            _signalSet.removeAll();
+            if (!_requestInProgress)
+                _signalSet.removeAll();
         }
     }
 }
