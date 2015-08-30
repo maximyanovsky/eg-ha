@@ -6,11 +6,11 @@ package services.search
 
     import services.network.INetworkService;
 
-    import common.signals.SignalErrorEvent;
+    import common.signals.ErrorEventSignal;
 
     public class MockNetworkService implements INetworkService
     {
-        private var _failed:SignalErrorEvent = new SignalErrorEvent();
+        private var _failed:ErrorEventSignal = new ErrorEventSignal();
         private var _received:Signal = new Signal(String);
 
         public function get received():Signal
@@ -18,7 +18,7 @@ package services.search
             return _received;
         }
 
-        public function get failed():SignalErrorEvent
+        public function get failed():ErrorEventSignal
         {
             return _failed;
         }

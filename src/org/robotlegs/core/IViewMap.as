@@ -61,7 +61,7 @@ package org.robotlegs.core
 		/**
 		 * The <code>IViewMap</code>'s <code>DisplayObjectContainer</code>
 		 *
-		 * @return view The <code>DisplayObjectContainer</code> to use as scope for this <code>IViewMap</code>
+		 * @return views The <code>DisplayObjectContainer</code> to use as scope for this <code>IViewMap</code>
 		 */
 		function get contextView():DisplayObjectContainer;
 		

@@ -5,7 +5,7 @@ package controller
 
     import org.robotlegs.mvcs.SignalCommand;
 
-    import views.GalleryView;
+    import views.ui.GalleryView;
 
     public class StartupCommand extends SignalCommand
     {

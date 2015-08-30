@@ -1,4 +1,4 @@
-package
+package controller.signals
 {
     import org.osflash.signals.Signal;
 

@@ -1,4 +1,4 @@
-package views
+package views.components
 {
     import common.IDisposable;
 

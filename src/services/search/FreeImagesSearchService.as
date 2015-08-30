@@ -3,9 +3,10 @@ package services.search
     import flash.events.ErrorEvent;
 
     import services.network.INetworkService;
+    import services.network.NetworkServiceDataFormat;
     import services.search.vos.SearchResultVO;
 
-    import common.signals.SignalString;
+    import common.signals.StringSignal;
 
     /**
      * Service for receiving images info from freeimages.pictures API
@@ -19,13 +20,13 @@ package services.search
         private static const API_KEY:String = "9203182073775680";
         private static const FORMAT:String = "json";
 
-        private var _received:SignalSearchResult;
-        private var _failed:SignalString;
+        private var _received:SearchResultVOSignal;
+        private var _failed:StringSignal;
 
         public function FreeImagesSearchService()
         {
-            _received = new SignalSearchResult();
-            _failed = new SignalString();
+            _received = new SearchResultVOSignal();
+            _failed = new StringSignal();
         }
 
         public function getResults(keyword:String):void
@@ -36,16 +37,16 @@ package services.search
             _networkService.received.add(onComplete);
             _networkService.failed.add(onFailed);
 
-            var url:String = API_URL + "/" + API_KEY + "/?keyword=" + keyword + "&sources=flickr&format=" + FORMAT;
-            _networkService.load(url);
+            var url:String = API_URL + "/" + API_KEY + "/?keyword=" + keyword + "&sources=flickr|wikimedia|pixabay|morguefile|google|openclipart&format=" + FORMAT;
+            _networkService.load(url, NetworkServiceDataFormat.TEXT);
         }
 
-        public function get received():SignalSearchResult
+        public function get received():SearchResultVOSignal
         {
             return _received;
         }
 
-        public function get failed():SignalString
+        public function get failed():StringSignal
         {
             return _failed;
         }

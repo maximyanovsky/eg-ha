@@ -2,9 +2,9 @@ package common.signals
 {
     import org.osflash.signals.Signal;
 
-    public class SignalString extends Signal
+    public class StringSignal extends Signal
     {
-        public function SignalString()
+        public function StringSignal()
         {
             super (String);
         }

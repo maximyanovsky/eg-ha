@@ -5,19 +5,19 @@
       <configuration name="EvolutionGaming" pure-as="true" main-class="EvolutionGaming" output-file="EvolutionGaming.swf" output-folder="$MODULE_DIR$/out">
         <dependencies target-player="11.1">
           <entries>
-            <entry library-id="6205491f-4ae1-42be-a9d1-57244c4b36e3">
+            <entry library-id="55529971-3181-4565-a59c-f44040605e53">
               <dependency linkage="Test" />
             </entry>
-            <entry library-id="eafc0b46-edc4-485a-be09-8ebecce88943">
-              <dependency linkage="Test" />
-            </entry>
-            <entry library-id="d461c525-e1e2-4a74-ad45-e32281e44426">
+            <entry library-id="45a1ea35-b8c3-4c3d-8f94-8aa9e1a58865">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="ebc72585-d225-45f5-9c95-f8e0e33eb020">
+            <entry library-id="fad87813-f71f-482a-97ce-429d251cbd8f">
               <dependency linkage="Test" />
             </entry>
-            <entry library-id="c53cee18-0a22-4c70-b4c5-eb378dcd3f6a">
+            <entry library-id="ceecf4e8-7555-4ba9-be26-842049c353f1">
+              <dependency linkage="Test" />
+            </entry>
+            <entry library-id="9a265128-ab35-4c01-802d-1c3caacf0030">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -41,7 +41,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="6205491f-4ae1-42be-a9d1-57244c4b36e3" />
+        <properties id="55529971-3181-4565-a59c-f44040605e53" />
         <CLASSES>
           <root url="jar://$MODULE_DIR$/libs/flexunit-4.2.0-20140410-as3_4.12.0.swc!/" />
         </CLASSES>
@@ -51,7 +51,17 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="eafc0b46-edc4-485a-be09-8ebecce88943" />
+        <properties id="45a1ea35-b8c3-4c3d-8f94-8aa9e1a58865" />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/greensock.swc!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="fad87813-f71f-482a-97ce-429d251cbd8f" />
         <CLASSES>
           <root url="jar://$MODULE_DIR$/libs/hamcrest-as3-flex-1.1.3.swc!/" />
         </CLASSES>
@@ -61,17 +71,7 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="d461c525-e1e2-4a74-ad45-e32281e44426" />
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/SwiftSuspenders-v1.6.0.swc!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library type="flex">
-        <properties id="ebc72585-d225-45f5-9c95-f8e0e33eb020" />
+        <properties id="ceecf4e8-7555-4ba9-be26-842049c353f1" />
         <CLASSES>
           <root url="jar://$MODULE_DIR$/libs/mockolate-0.12.4-as3.swc!/" />
         </CLASSES>
@@ -81,9 +81,9 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="c53cee18-0a22-4c70-b4c5-eb378dcd3f6a" />
+        <properties id="9a265128-ab35-4c01-802d-1c3caacf0030" />
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/greensock.swc!/" />
+          <root url="jar://$MODULE_DIR$/libs/SwiftSuspenders-v1.6.0.swc!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

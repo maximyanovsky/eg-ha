@@ -1,8 +1,15 @@
-package views
+package views.ui
 {
     import common.IDisposable;
 
+    import flash.display.DisplayObject;
+    import flash.display.DisplayObjectContainer;
+
     import flash.display.Sprite;
+
+    import views.components.FlatButton;
+
+    import views.components.FlatInput;
 
     public class GalleryView extends Sprite implements IDisposable
     {
@@ -12,9 +19,11 @@ package views
 
         private var _searchButton:FlatButton;
         private var _input:FlatInput;
+        private var _imageContainer:DisplayObjectContainer;
 
         public function GalleryView()
         {
+            _imageContainer = new Sprite();
             _searchButton = new FlatButton("search", BUTTON_WIDTH, BUTTON_HEIGHT);
             _input = new FlatInput("Type keyword...");
         }
@@ -34,6 +43,9 @@ package views
             _input.x = GAP;
             _input.y = GAP;
             _input.setSize(stage.stageWidth - 3 * GAP - BUTTON_WIDTH, BUTTON_HEIGHT);
+
+            addChild(_imageContainer);
+            _imageContainer.y = GAP * 2 +BUTTON_HEIGHT
         }
 
         public function get searchButton():FlatButton
@@ -50,6 +62,11 @@ package views
         {
             _searchButton.dispose();
             _input.dispose();
+        }
+
+        public function addImage(imageView:DisplayObject):void
+        {
+            _imageContainer.addChild(imageView);
         }
     }
 }

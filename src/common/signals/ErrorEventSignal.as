@@ -4,9 +4,9 @@ package common.signals
 
     import org.osflash.signals.Signal;
 
-    public class SignalErrorEvent extends Signal
+    public class ErrorEventSignal extends Signal
     {
-        public function SignalErrorEvent()
+        public function ErrorEventSignal()
         {
             super (ErrorEvent)
         }

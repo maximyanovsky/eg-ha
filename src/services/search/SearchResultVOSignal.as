@@ -4,9 +4,9 @@ package services.search
 
     import services.search.vos.SearchResultVO;
 
-    public class SignalSearchResult extends Signal
+    public class SearchResultVOSignal extends Signal
     {
-        public function SignalSearchResult()
+        public function SearchResultVOSignal()
         {
             super (SearchResultVO);
         }

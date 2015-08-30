@@ -4,19 +4,19 @@ package services.search
 
     import org.osflash.signals.ISignal;
 
-    import common.signals.SignalString;
+    import common.signals.StringSignal;
 
     public interface IImageSearchService extends IDisposable
     {
         /**
          * dispatched after all the received data is parsed
          */
-        function get received():SignalSearchResult;
+        function get received():SearchResultVOSignal;
 
         /**
          * error description dispatched if the search is failed
          */
-        function get failed():SignalString;
+        function get failed():StringSignal;
 
         /**
          * Request images info by the search keyword

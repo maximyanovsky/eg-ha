@@ -4,14 +4,14 @@ package services.network
 
     import org.osflash.signals.Signal;
 
-    import common.signals.SignalErrorEvent;
+    import common.signals.ErrorEventSignal;
 
     public interface INetworkService extends IDisposable
     {
         function get received():Signal;
 
-        function get failed():SignalErrorEvent;
+        function get failed():ErrorEventSignal;
 
-        function load(path:String);
+        function load(path:String, dataFormat:String);
     }
 }

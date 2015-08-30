@@ -107,7 +107,7 @@ package org.robotlegs.core
 		/**
 		 * The <code>IMediatorMap</code>'s <code>DisplayObjectContainer</code>
 		 *
-		 * @return view The <code>DisplayObjectContainer</code> to use as scope for this <code>IMediatorMap</code>
+		 * @return views The <code>DisplayObjectContainer</code> to use as scope for this <code>IMediatorMap</code>
 		 */
 		function get contextView():DisplayObjectContainer;
 		

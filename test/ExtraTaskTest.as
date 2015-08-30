@@ -136,7 +136,7 @@ package
         {
             syntheticTest(10, 10)
         }
-        
+
         private function syntheticTest(maxArrayLength:int, maxArrayValue:int):void
         {
             function randomArray(length:int, maxValue:int):Array
