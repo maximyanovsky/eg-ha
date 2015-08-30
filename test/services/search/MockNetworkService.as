@@ -1,12 +1,10 @@
 package services.search
 {
-    import flash.events.ErrorEvent;
+    import common.signals.ErrorEventSignal;
 
     import org.osflash.signals.Signal;
 
     import services.network.INetworkService;
-
-    import common.signals.ErrorEventSignal;
 
     public class MockNetworkService implements INetworkService
     {
@@ -23,7 +21,7 @@ package services.search
             return _failed;
         }
 
-        public function load(path:String)
+        public function load(path:String, dataFormat:String)
         {
         }
 

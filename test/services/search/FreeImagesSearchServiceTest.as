@@ -9,11 +9,14 @@ package services.search
 
     import org.flexunit.assertThat;
     import org.flexunit.async.Async;
+    import org.hamcrest.collection.array;
+    import org.hamcrest.core.anything;
     import org.hamcrest.object.equalTo;
     import org.hamcrest.text.containsString;
     import org.swiftsuspenders.Injector;
 
     import services.network.INetworkService;
+    import services.network.NetworkServiceDataFormat;
     import services.search.vos.SearchResultVO;
 
     public class FreeImagesSearchServiceTest
@@ -42,7 +45,7 @@ package services.search
             const KEYWORD:String = "some keyword";
             const DATA:String = "some data";
 
-            mock(networkService).method("load").args(containsString(KEYWORD)).calls(function():void{
+            mock(networkService).method("load").calls(function():void{
                networkService.received.dispatch(DATA);
             });
             var testResult:SearchResultVO = new SearchResultVO();
