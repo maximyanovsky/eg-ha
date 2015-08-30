@@ -37,14 +37,19 @@ package views.ui
             height = bounds.height;
         }
 
-        public function setVisible(value:Boolean):void
+        public function setVisible(value:Boolean, callback:Function = null):void
         {
             if (_visible != value)
             {
                 _visible = value;
                 if (_visibleTween)
                     _visibleTween.invalidate();
-                _visibleTween = TweenLite.to(this, 0.5, {alpha: _visible ? 1.0 : 0, ease: Linear.ease});
+                _visibleTween = TweenLite.to(this, 0.5, {alpha: _visible ? 1.0 : 0, ease: Linear.ease, onComplete: callback});
+            }
+            else
+            {
+                if (callback)
+                    callback();
             }
         }
     }

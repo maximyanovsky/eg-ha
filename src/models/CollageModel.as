@@ -35,7 +35,24 @@ package models
         public function addImage(image:ImageModel):void
         {
             _images.push(image);
+            trace("image added " + image);
             _imageAdded.dispatch(image);
+        }
+
+        public function removeImage(image:ImageModel):void
+        {
+            var index:int = _images.indexOf(image);
+            if (index == -1)
+                throw new ArgumentError("invalid image");
+            _images.splice(index, 1);
+            trace("image removed " + image);
+            image.removedFromCollage.dispatch();
+        }
+
+        public function removeAllImages():void
+        {
+            for each (var image:ImageModel in _images.concat())
+                removeImage(image);
         }
 
         public function get resized():Signal

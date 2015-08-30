@@ -6,6 +6,9 @@ package views.ui
     import flash.display.DisplayObjectContainer;
 
     import flash.display.Sprite;
+    import flash.text.TextField;
+    import flash.text.TextFormat;
+    import flash.text.TextFormatAlign;
 
     import views.components.FlatButton;
 
@@ -20,12 +23,18 @@ package views.ui
         private var _searchButton:FlatButton;
         private var _input:FlatInput;
         private var _imageContainer:DisplayObjectContainer;
+        private var _statusTf:TextField;
 
         public function GalleryView()
         {
             _imageContainer = new Sprite();
             _searchButton = new FlatButton("search", BUTTON_WIDTH, BUTTON_HEIGHT);
             _input = new FlatInput("Type keyword...");
+
+            _statusTf = new TextField();
+            var format:TextFormat = new TextFormat("Verdana", 16, 0x0, false);
+            format.align = TextFormatAlign.CENTER;
+            _statusTf.defaultTextFormat = format;
         }
 
         public function update():void
@@ -46,6 +55,15 @@ package views.ui
 
             addChild(_imageContainer);
             _imageContainer.y = GAP * 2 +BUTTON_HEIGHT
+
+            addChild(_statusTf);
+            _statusTf.width = stage.stageWidth;
+            _statusTf.y = stage.stageHeight/2;
+        }
+
+        public function setStatus(text:String):void
+        {
+            _statusTf.text = text;
         }
 
         public function get searchButton():FlatButton

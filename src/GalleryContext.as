@@ -1,11 +1,14 @@
 package
 {
     import controller.AddImageCommand;
+    import controller.DestroyImageCommand;
     import controller.IImageViewFactory;
     import controller.ImageViewFactory;
+    import controller.signals.ImageViewRemovedSignal;
     import controller.ResizeCollageCommand;
     import controller.SearchCommand;
     import controller.signals.ImageReceivedSignal;
+    import controller.signals.SearchFailedSignal;
     import controller.signals.SearchSubmittedSignal;
     import controller.StartupCommand;
     import controller.UpdateCollageLayoutCommand;
@@ -55,6 +58,7 @@ package
             injector.mapValue(CollageModel, collageModel);
             injector.mapValue(ICollageModel, collageModel);
             injector.mapSingletonOf(IImageViewFactory, ImageViewFactory);
+            injector.mapSingleton(SearchFailedSignal);
 
             mediatorMap.mapView(GalleryView, GalleryMediator);
 
@@ -65,6 +69,7 @@ package
             signalCommandMap.mapSignal(collageModel.imageAdded, UpdateCollageLayoutCommand);
             signalCommandMap.mapSignalClass(SearchSubmittedSignal, SearchCommand);
             signalCommandMap.mapSignalClass(ImageReceivedSignal, AddImageCommand);
+            signalCommandMap.mapSignalClass(ImageViewRemovedSignal, DestroyImageCommand);
 
             super.startup();
         }

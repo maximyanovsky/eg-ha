@@ -1,6 +1,7 @@
 package views
 {
     import controller.IImageViewFactory;
+    import controller.signals.SearchFailedSignal;
     import controller.signals.SearchSubmittedSignal;
 
     import flash.display.DisplayObject;
@@ -18,6 +19,7 @@ package views
         [Inject] public var searchSubmitted:SearchSubmittedSignal;
         [Inject] public var collage:ICollageModel;
         [Inject] public var imageViewFactory:IImageViewFactory;
+        [Inject] public var searchFailedSignal:SearchFailedSignal;
 
         [Inject] public var view:GalleryView;
 
@@ -27,12 +29,32 @@ package views
             view.input.changed.add(onInputChanged);
             view.searchButton.clicked.add(onSearchClick);
             collage.imageAdded.add(onImageAdded);
+            searchSubmitted.add(onSearchSubmitted);
+            searchFailedSignal.add(onSearchFailed);
             onStageResized();
             onInputChanged();
         }
 
+        private function onSearchFailed(status:String):void
+        {
+            if (status == SearchFailedSignal.LOADING_ERROR)
+            {
+                view.setStatus("Loading error :(");
+            }
+            else if (status == SearchFailedSignal.NO_RESULTS)
+            {
+                view.setStatus("Nothing found :(");
+            }
+        }
+
+        private function onSearchSubmitted(value:String):void
+        {
+            view.setStatus("Searching...");
+        }
+
         private function onImageAdded(image:IImageModel):void
         {
+            view.setStatus("");
             var imageView:DisplayObject = imageViewFactory.createView(image)
             view.addImage(imageView);
         }

@@ -20,5 +20,7 @@ package models
         function get hiddenChanged():Signal;
 
         function get hidden():Boolean;
+
+        function get removedFromCollage():Signal;
     }
 }
