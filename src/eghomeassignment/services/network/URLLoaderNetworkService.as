@@ -48,7 +48,7 @@ package eghomeassignment.services.network
             return _failed;
         }
 
-        public function load(url:String, dataFormat:String)
+        public function load(url:String, dataFormat:String):void
         {
             if (!NetworkServiceDataFormat.isValid(dataFormat))
             {

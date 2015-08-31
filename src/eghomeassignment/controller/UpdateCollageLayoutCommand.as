@@ -12,6 +12,8 @@ package eghomeassignment.controller
 
         public function execute():void
         {
+            var i:int;
+            var pic:ImageModel;
             var width:Number = collageModel.width;
             var height:Number = collageModel.height;
 
@@ -33,9 +35,9 @@ package eghomeassignment.controller
             for (var rowIndex:int = 0; rowIndex < rowCount; rowIndex++)
             {
                 var rowFreeSpace:Number = width;
-                for (var i:int = 0; i < images.length; ++i)
+                for (i = 0; i < images.length; ++i)
                 {
-                    var pic:ImageModel = images[i];
+                    pic = images[i];
                     if (!pic) continue;
                     var picWidth:Number = rowHeight * pic.aspectRatio;
                     if (picWidth <= rowFreeSpace)
@@ -55,9 +57,9 @@ package eghomeassignment.controller
                 }
             }
 
-            for (var i:int = 0; i < images.length; ++i)
+            for (i = 0; i < images.length; ++i)
             {
-                var pic:ImageModel = images[i];
+                pic = images[i];
                 if (pic)
                 {
                     pic.setHidden(true);

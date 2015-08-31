@@ -6,7 +6,7 @@ package eghomeassignment.services.network
 
     public interface IAssetService extends IDisposable
     {
-        function load(url:String);
+        function load(url:String):void;
 
         function get received():BitmapdataSignal;
 

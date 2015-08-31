@@ -3,7 +3,7 @@ package
     public class ExtraQuestionTest
     {
         [Test]
-        public function test1()
+        public function test1():void
         {
             //At first we have an XML node with 5 children nodes. Each one contains attribute 'myVal' and element value 'data'
             var xmlData:XML =
@@ -29,7 +29,7 @@ package
         }
 
         [Test (expects="ReferenceError")]
-        public function test2()
+        public function test2():void
         {
             //so whats wrong with it? Lets imagine that someone added new node to our XML
             var xmlData:XML =
@@ -45,7 +45,7 @@ package
         }
 
         [Test]
-        public function test3()
+        public function test3():void
         {
             var xmlData:XML =
                     <root>

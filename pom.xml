@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<!--<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>-->
+	
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.maximyanovsky</groupId>
+	<artifactId>eg-homeassignment</artifactId>
+	
+	<version>0.0.1</version>
+	
+	<packaging>swf</packaging>
+	
+	<name>Evolution Gaming Home Assignment</name>
+
+	<properties>
+		<maven.version>3.0.3</maven.version>
+		<flexmojos.version>4.0-RC2</flexmojos.version>
+		
+		<!-- The Flex SDK to compile against -->
+		<flex.sdk.version>4.6.b.23201</flex.sdk.version>
+		<swiftsuspenders.version>1.6.0</swiftsuspenders.version>
+		
+		<!-- Unit testing frameworks and dependencies -->
+		<flexunit.version>4.2.0</flexunit.version>
+		<hamcrest.version>1.1.3</hamcrest.version>
+		<mockolate.version>0.12.4</mockolate.version>
+	</properties>
+
+	<distributionManagement>
+		<repository>
+			<id>sonatype-staging</id>
+			<url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<testSourceDirectory>test</testSourceDirectory>
+		<resources>
+			<resource><directory>src</directory></resource>	
+		</resources>
+		
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.flexmojos</groupId>
+				<artifactId>flexmojos-maven-plugin</artifactId>
+				<version>${flexmojos.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<targetPlayer>11.1.0</targetPlayer>
+					<swfVersion>13</swfVersion>
+					<keepAs3Metadatas>
+						<keepAs3Metadata>Inject</keepAs3Metadata>
+						<keepAs3Metadata>PostConstruct</keepAs3Metadata>
+					</keepAs3Metadatas>
+					<dumpConfigAttach>true</dumpConfigAttach>
+					<verboseStacktraces>true</verboseStacktraces>
+					<compilerWarnings>
+						<warn-no-constructor>false</warn-no-constructor>
+					</compilerWarnings>
+					<includeTestFiles>
+						<includeTestFile>MainTestSuite.as</includeTestFile>
+					</includeTestFiles>
+					<includeSources>
+					  <includeSource>${project.build.sourceDirectory}</includeSource>
+					</includeSources>
+					<sourceFile>EvolutionGaming.as</sourceFile>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.adobe.flex</groupId>
+						<artifactId>compiler</artifactId>
+						<version>${flex.sdk.version}</version>
+						<type>pom</type>
+					</dependency>
+				</dependencies>
+			</plugin>
+	</plugins>
+	</build>
+
+	<dependencies>
+		<!-- Note: while this includes the entire flex framework for compilation, the default for SWCs is external linkage, so nothing from the Flex framework will be added to the final output. -->
+		<dependency>
+			<groupId>com.adobe.flex.framework</groupId>
+			<artifactId>flex-framework</artifactId>
+			<version>${flex.sdk.version}</version>
+			<type>pom</type>
+		</dependency>
+		
+		<!--- Swift Suspenders. The used definitions will be merged in. -->
+		<dependency>
+			<groupId>org.swiftsuspenders</groupId>
+			<artifactId>swiftsuspenders</artifactId>
+			<version>${swiftsuspenders.version}</version>
+			<type>swc</type>
+			<scope>merged</scope>
+		</dependency>
+		
+		<!-- TEST Dependencies. (Only compiled in the unit test runner) -->
+		<dependency>
+			<groupId>com.adobe.flexunit</groupId>
+			<artifactId>flexunit</artifactId>
+			<version>${flexunit.version}</version>
+			<type>swc</type>
+			<classifier>flex</classifier>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-as3</artifactId>
+			<version>${hamcrest.version}</version>
+			<type>swc</type>
+			<classifier>flex</classifier>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>mockolate</groupId>
+			<artifactId>mockolate</artifactId>
+			<version>${mockolate.version}</version>
+			<type>swc</type>
+			<classifier>flex</classifier>
+			<scope>test</scope>
+		</dependency>
+
+    </dependencies>
+</project>

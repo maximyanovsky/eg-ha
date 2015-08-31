@@ -50,7 +50,7 @@ package eghomeassignment.services.network
             _received.dispatch(Bitmap(_loader.content).bitmapData);
         }
 
-        public function load(url:String)
+        public function load(url:String):void
         {
             networkService.load(url, NetworkServiceDataFormat.BINARY);
         }

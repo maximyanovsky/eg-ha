@@ -21,7 +21,7 @@ package eghomeassignment.services.search
             return _failed;
         }
 
-        public function load(path:String, dataFormat:String)
+        public function load(path:String, dataFormat:String):void
         {
         }
 

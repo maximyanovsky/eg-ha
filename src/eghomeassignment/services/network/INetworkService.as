@@ -11,6 +11,6 @@ package eghomeassignment.services.network
 
         function get failed():ErrorEventSignal;
 
-        function load(path:String, dataFormat:String);
+        function load(path:String, dataFormat:String):void;
     }
 }

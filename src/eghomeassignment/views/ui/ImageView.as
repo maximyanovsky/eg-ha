@@ -76,7 +76,7 @@ package eghomeassignment.views.ui
             }
             else
             {
-                if (callback)
+                if (callback != null)
                 {
                     callback();
                 }
