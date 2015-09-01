@@ -1,11 +1,13 @@
 package eghomeassignment.models
 {
+    import eghomeassignment.utils.IPackable;
+
     import flash.display.BitmapData;
     import flash.geom.Rectangle;
 
     import org.osflash.signals.Signal;
 
-    public class ImageModel implements IImageModel
+    public class ImageModel implements IImageModel, IPackable
     {
         private static var _lastId:int = 0;
 

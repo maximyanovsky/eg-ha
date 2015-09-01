@@ -2,6 +2,7 @@ package eghomeassignment.controller
 {
     import eghomeassignment.models.CollageModel;
     import eghomeassignment.models.ImageModel;
+    import eghomeassignment.utils.PackUtils;
 
     import flash.geom.Rectangle;
 
@@ -17,16 +18,7 @@ package eghomeassignment.controller
             var width:Number = collageModel.width;
             var height:Number = collageModel.height;
 
-            var rowHeight:Number = 150;
-            if (height > rowHeight * 2)
-            {
-                rowHeight = height / Math.floor(height / rowHeight);
-            }
-            else
-            {
-                rowHeight = height;
-            }
-
+            var rowHeight:Number = PackUtils.findOptimalRowHeight(width, height, collageModel.images);
             var rowCount:int = height / rowHeight;
 
             var images:Vector.<ImageModel> = collageModel.images.concat();
